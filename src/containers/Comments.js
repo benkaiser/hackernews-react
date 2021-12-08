@@ -48,7 +48,7 @@ const Comments = ({ comments, theme }) => {
 		<div style={{ padding: '0 15px' }}>
 			{nodes.length !== 0 ? (
 				<Fragment>
-					<div style={{ marginTop: '38px' }}>
+					<div style={{ marginTop: '0px' }}>
 						<span>
 							{comments.title}
 							<small>{comments.domain && `(${comments.domain || ''})`}</small>

@@ -82,7 +82,7 @@ const StoryList = ({ stories = [], page = '1' }) => {
 													color: 'var(--link)',
 												}}
 												aria-label="Story comments"
-												to={`/item/${story.id}`}
+												to={`/item/article/${story.id}`}
 											>
 												{story.comments_count} comments
 											</Link>

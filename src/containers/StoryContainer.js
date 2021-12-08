@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import Pagination from './Pagination/Pagination';
 import StoryList from './StoryList';
 import { typeStories, getTotalPages } from '../constants/constants';
 import { validatePage } from '../util/validators';
@@ -10,10 +9,16 @@ function StoryContainer({ isOffLine, path, params, url }) {
 	const { page } = params;
 	const [isValidPage, setValidPage] = useState(true);
 	const [storyData, setStoryData] = useState({});
+	const queryParam = window.location.search;
 
 	async function setStory(story, page) {
 		const totalPages = getTotalPages[story];
-		const stories = await getStoryPage(story, page);
+		let stories = await getStoryPage(story, page);
+		let pointsOver = new URLSearchParams(window.location.search).get('points');
+		if (pointsOver) {
+			pointsOver = parseInt(pointsOver);
+			stories = stories.filter(story => story.points > pointsOver);
+		}
 		const storyData = {
 			story,
 			stories,
@@ -38,7 +43,7 @@ function StoryContainer({ isOffLine, path, params, url }) {
 			}
 		}
 		validateStoryType();
-	}, [isOffLine, page, path, url]);
+	}, [isOffLine, page, path, url, queryParam]);
 
 	return (
 		<Fragment>
@@ -46,7 +51,6 @@ function StoryContainer({ isOffLine, path, params, url }) {
 
 			{isValidPage && (
 				<Fragment>
-					<Pagination {...storyData} />
 					<StoryList {...storyData} />
 				</Fragment>
 			)}

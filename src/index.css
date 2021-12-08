@@ -16,7 +16,9 @@
 	--link: #74befa;
 	--skeleton: #091e42;
 }
-
+html {
+	height: 100%;
+}
 body {
 	margin: 0;
 	padding: 0;
@@ -28,6 +30,9 @@ body {
 	-webkit-text-size-adjust: 100%;
 	-moz-osx-font-smoothing: grayscale !important;
 	-webkit-font-smoothing: antialiased !important;
+}
+#root {
+	height: 100%;
 }
 *,
 *::after,
@@ -63,7 +68,12 @@ body {
 .container {
 	max-width: 980px;
 	margin: 0 auto;
-	padding: 102px 0px 0px;
+	height: 100%;
+	padding: 122px 0px 0px;
+}
+.itemIframe {
+	height: 100%;
+	width: 100%;
 }
 code {
 	white-space: initial;

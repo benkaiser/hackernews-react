@@ -38,7 +38,7 @@ const Pagination = (storyData) => {
 				{currentPage !== 1 && (
 					<Link
 						id="previous-page"
-						to={`/${story}/${nextPage}`}
+						to={`/${story}/${nextPage}${window.location.search}`}
 						style={paginationLinkStyle}
 					>
 						&lt; prev
@@ -47,7 +47,7 @@ const Pagination = (storyData) => {
 				<span style={paginationSeparatorStyle}>{`${currentPage}/${totalPages}`}</span>
 
 				{currentPage !== totalPages && (
-					<Link id="next-page" to={`/${story}/${prevPage}`} style={paginationLinkStyle}>
+					<Link id="next-page" to={`/${story}/${prevPage}${window.location.search}`} style={paginationLinkStyle}>
 						next &gt;
 					</Link>
 				)}

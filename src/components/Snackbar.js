@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import logo from '../logo.svg';
 
 const Snackbar = ({ showStatus = true }) => {
 	const status = (showStatus && { display: 'flex' }) || { display: 'none' };

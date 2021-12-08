@@ -4,7 +4,7 @@ import Comments from './Comments';
 import { getStoryItem } from '../api/fetchApi';
 import { validateItem, isValidObject } from '../util/validators';
 
-function ItemContainer(props = {}) {
+function ItemCommentsContainer(props = {}) {
 	const { params } = props;
 	const [isValidItem, setValidItem] = useState(true);
 	const [hasComments, setHasComments] = useState(true);
@@ -39,8 +39,8 @@ function ItemContainer(props = {}) {
 		</Fragment>
 	);
 }
-ItemContainer.propTypes = {
+ItemCommentsContainer.propTypes = {
 	props: PropTypes.object,
 };
 
-export default ItemContainer;
+export default ItemCommentsContainer;

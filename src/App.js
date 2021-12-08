@@ -8,8 +8,10 @@ import Progress from './components/Progress/Progress';
 import Snackbar from './components/Snackbar';
 
 const Navigation = lazy(() => import('./containers/Navigation/Navigation'));
+const ItemNavigation = lazy(() => import('./containers/Navigation/ItemNavigation'));
 const StoryContainer = lazy(() => import('./containers/StoryContainer'));
-const ItemContainer = lazy(() => import('./containers/ItemContainer'));
+const ItemCommentsContainer = lazy(() => import('./containers/ItemCommentsContainer'));
+const ItemArticleContainer = lazy(() => import('./containers/ItemArticleContainer'));
 const UserContainer = lazy(() => import('./containers/UserContainer'));
 
 const renderLoader = () => <Skeleton height="38px"></Skeleton>;
@@ -42,7 +44,10 @@ function App() {
 	return (
 		<Fragment>
 			<Suspense fallback={renderLoader()}>
-				<Navigation {...{ themeMode, isOffLine }} />
+				<Switch>
+					<Route path={'/item/:type/:item'} render={({ match }) => <ItemNavigation {...match} {...{ themeMode, isOffLine }} />} />
+					<Route path={'/'} render={() => <Navigation {...{ themeMode, isOffLine }} />}/>
+				</Switch>
 			</Suspense>
 			<main className="container">
 				<Suspense fallback={<Progress />}>
@@ -50,6 +55,7 @@ function App() {
 						<Route
 							path={[
 								'/news/:page?',
+								'/news/:page?/over',
 								'/newest/:page?',
 								'/show/:page?',
 								'/ask/:page?',
@@ -61,9 +67,15 @@ function App() {
 						/>
 
 						<Route
-							path="/item/:item"
+							path="/item/comments/:item"
 							render={({ match, history }) => (
-								<ItemContainer isOffLine={isOffLine} {...match} {...history} />
+								<ItemCommentsContainer isOffLine={isOffLine} {...match} {...history} />
+							)}
+						/>
+						<Route
+							path="/item/article/:item"
+							render={({ match, history }) => (
+								<ItemArticleContainer isOffLine={isOffLine} {...match} {...history} />
 							)}
 						/>
 						<Route

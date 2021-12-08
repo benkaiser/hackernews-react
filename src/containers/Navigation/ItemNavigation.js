@@ -3,7 +3,7 @@ import { Link, NavLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ToggleButton from '../../components/ToggleButton/ToggleButton';
 
-const Navigation = ({ themeMode, isOffLine }) => {
+const ItemNavigation = ({ themeMode, params }) => {
 	const navigationStyle = {
 		position: 'fixed',
 		width: '100%',
@@ -46,81 +46,37 @@ const Navigation = ({ themeMode, isOffLine }) => {
 				<h3 style={{ color: 'var(--link)' }}><Link to="/">Hacker news</Link></h3>
 				<ToggleButton themeMode={themeMode} />
 			</div>
-			<nav>
+			<div>
 				<ul style={navigationNav}>
 					<li>
 						<NavLink
 							id="news-link"
-							to="/news/1"
+							to={`/item/article/${params.item}`}
 							style={navigationLink}
 							activeStyle={navigationLinkActive}
-							isActive={(match, location) => /news/.test(location.pathname) && !/over/.test(location.pathname)}
+							isActive={(match, location) => /article/.test(location.pathname)}
 						>
-							News
+							Link
 						</NavLink>
 					</li>
 					<li>
 						<NavLink
 							id="top-news-link"
-							to="/news/1/over?points=300"
+							to={`/item/comments/${params.item}`}
 							style={navigationLink}
 							activeStyle={navigationLinkActive}
-							isActive={(match, location) => /over/.test(location.pathname)}
+							isActive={(match, location) => /comments/.test(location.pathname)}
 						>
-							Top News
-						</NavLink>
-					</li>
-					<li>
-						<NavLink
-							id="newest-link"
-							to="/newest/1"
-							style={navigationLink}
-							activeStyle={navigationLinkActive}
-							isActive={(match, location) => /newest/.test(location.pathname)}
-						>
-							Newest
-						</NavLink>
-					</li>
-					<li>
-						<NavLink
-							id="show-link"
-							to="/show/1"
-							style={navigationLink}
-							activeStyle={navigationLinkActive}
-							isActive={(match, location) => /show/.test(location.pathname)}
-						>
-							Show
-						</NavLink>
-					</li>
-					<li>
-						<NavLink
-							id="ask-link"
-							to="/ask/1"
-							style={navigationLink}
-							activeStyle={navigationLinkActive}
-							isActive={(match, location) => /ask/.test(location.pathname)}
-						>
-							Ask
-						</NavLink>
-					</li>
-					<li>
-						<NavLink
-							id="jobs-link"
-							to="/jobs/1"
-							style={navigationLink}
-							activeStyle={navigationLinkActive}
-							isActive={(match, location) => /jobs/.test(location.pathname)}
-						>
-							Jobs
+							Comments
 						</NavLink>
 					</li>
 				</ul>
-			</nav>
+			</div>
 		</header>
 	);
 };
-Navigation.propTypes = {
+ItemNavigation.propTypes = {
 	currentMode: PropTypes.string,
 };
 
-export default withRouter(Navigation);
+export default withRouter(ItemNavigation);
